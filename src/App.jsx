@@ -1,3 +1,4 @@
+
 import { useState } from "react"
 import confetti from "canvas-confetti"
 const TURNS = {
@@ -35,13 +36,13 @@ const Winner_combos = [
 
 function App() {
   const [board, setBoard] = useState(() => {
-    const boardFromStorage = windows.localStorage.getItem('board')
+    const boardFromStorage = window.localStorage.getItem('board')
     if(boardFromStorage) return JSON.parse(boardFromStorage)
     return Array(9).fill(null)
   })
 
   const [turn, setTurn] = useState(() =>  {
-    const turnFromStorage = windows.localStorage.getItem('turn')
+    const turnFromStorage = window.localStorage.getItem('turn')
   return turnFromStorage ?? TURNS.X
   })
 
@@ -66,8 +67,8 @@ function App() {
     setTurn(TURNS.X)
     setWinner(null)
 
-    windows.localStorage.removeItem('board')
-    windows.localStorage.removeItem('turn')
+    window.localStorage.removeItem('board')
+    window.localStorage.removeItem('turn')
   }
 
   const checkEndGame = (newBoard) => {
@@ -82,8 +83,8 @@ function App() {
 
    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X 
    setTurn(newTurn)
-   windows.localStorage.setItem('board', JSON.stringify(newBoard))
-   windows.localStorage.setItem('turn', newTurn)
+   window.localStorage.setItem('board', JSON.stringify(newBoard))
+   window.localStorage.setItem('turn', newTurn)
    const newWinner = checkWinner(newBoard)
    if(newWinner){
     confetti()
@@ -151,3 +152,5 @@ function App() {
 }
 
 export default App
+
+
